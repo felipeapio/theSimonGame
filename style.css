@@ -1,0 +1,66 @@
+*{
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    color: #fff;
+}
+
+body{
+    background-color: #061c38;
+}
+
+#container{
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr 3fr 1fr;
+    grid-template-columns: 1fr;    
+}
+
+#header{
+    margin: auto;
+}
+
+.footer{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.datascore{
+    margin-right: 10%;
+}
+
+
+#game{
+    display: grid;
+    grid-template-columns: 20vw 20vw;
+    grid-template-rows: 20vh 20vh;
+    justify-content: center;
+    align-content: center;  
+    gap: 15px; 
+    
+}
+
+.container{
+    border: 10px solid black;
+    border-radius: 20px;
+    
+}
+
+#green{
+    background-color: green;
+}
+
+#red{
+    background-color: red;
+}
+
+#yellow{
+    background-color: yellow;
+}
+
+#blue{
+    background-color: blue;
+}
