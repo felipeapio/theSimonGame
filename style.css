@@ -43,7 +43,7 @@ body{
     
 }
 
-.container{
+.containerGame{
     border: 10px solid black;
     border-radius: 20px;
     
@@ -63,4 +63,12 @@ body{
 
 #blue{
     background-color: blue;
+}
+
+.selected{
+    filter: brightness(0) invert(1);
+}
+
+.wrong{
+    background-color: red;
 }
