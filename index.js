@@ -5,6 +5,13 @@ var gameArray =  [];
 var resultArray =  [];
 var title = document.querySelector("#title");
 var level = 0;
+
+var highest = 0;
+var score = 0;
+
+var scoreNode = document.querySelectorAll(".score");
+setScore(0, 0);
+
 anyKey();
 
 function anyKey(){
@@ -28,10 +35,10 @@ function startGame(){
     level++;
     title.textContent = "Level " + level;
     var randomNumber;
-    
-    for(let i = 0; i < level; i++){
-        
-        setTimeout(()=>{;
+    let i = 0;
+    //https://stackoverflow.com/questions/3583724/how-do-i-add-a-delay-in-a-javascript-loop 
+    function myLoop(){
+        setTimeout(function(){
             console.log("Teste, level: " + level);
             randomNumber = getRandomInt(4);
             gameArray[i] = randomNumber;
@@ -63,9 +70,13 @@ function startGame(){
                     removeFilter(buttons[randomNumber], 'selected');
                     break;
             }
-        }, 300);
-
+            i++;
+            if(i < level){
+                myLoop();
+            }
+        }, 500);
     }
+    myLoop();
     click();
     
 }
@@ -82,7 +93,6 @@ function wrong(){
     document.body.classList.add('wrong');
     title.textContent = "Game Over, Press Any Key to Restart";
     removeFilter(document.body, 'wrong');
-    //removeClick();
     anyKey();
 }
 
@@ -101,19 +111,18 @@ function click(){
             //e.preventDefault();
             e.stopImmediatePropagation();
         });
-        //above just a test
     }
 }
 
 function whatever(button, index){
-    console.log("Button: " + button.id + " Index: " + index);
-    //removeClickButton(button);
     if(!addResultArray(button, index)){
+        highestValidation(false);
         wrong();
-    }else if(gameArray.length === 0){
+    }if(gameArray.length === 0){
+        //next level
+        highestValidation(true);
         startGame();
-    };
-   // addClickButton(button, index);
+    }
 }
 
 function addClickButton(button, index){
@@ -136,7 +145,6 @@ function removeClick(){
 
 function addResultArray(buttons, i){
     resultArray.push(i);
-    console.log("Resultado Clicado: " + resultArray);
     buttons.classList.add("selected");
     removeFilter(buttons, 'selected');
     return comparaResultado();
@@ -156,5 +164,28 @@ function removeKey(){
         document.removeEventListener("keydown", startGame);
         keydown = false;
     }
+}
+
+function setScore(score, highest){
+    for(let i = 0; i < scoreNode.length; i++){
+        if(i === 0){
+            scoreNode[i].textContent = score;
+        }else{
+            scoreNode[i].textContent = highest;
+        }
+        
+    }
+}
+
+function highestValidation(validation){
+    if(validation){
+        score++;
+        if(score > highest){
+            highest = score;
+        }
+    }else{
+        score = 0;
+    }
     
+    setScore(score, highest);
 }
